@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Arch</string>
+    <string name="app_name">Architecture</string>
 
     <!-- Shared Elements-->
     <string name="shared_image">sharedimage</string>

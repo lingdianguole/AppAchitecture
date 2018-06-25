@@ -30,7 +30,6 @@ public class AppModule {
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         okHttpClient.connectTimeout(ApiConstants.TIMEOUT_IN_SEC, TimeUnit.SECONDS);
         okHttpClient.readTimeout(ApiConstants.TIMEOUT_IN_SEC, TimeUnit.SECONDS);
-        okHttpClient.addInterceptor(new RequestInterceptor());
         okHttpClient.addInterceptor(logging);
         return okHttpClient.build();
     }

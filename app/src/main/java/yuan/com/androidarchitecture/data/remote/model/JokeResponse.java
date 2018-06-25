@@ -6,13 +6,13 @@ import java.util.List;
 import yuan.com.androidarchitecture.data.local.entity.JokeEntity;
 
 public class JokeResponse {
-    private List<JokeEntity> results;
+    private List<JokeEntity> data;
 
-    public List<JokeEntity> getResults() {
-        return results;
+    public List<JokeEntity> getData() {
+        return data;
     }
 
-    public void setResults(List<JokeEntity> results) {
-        this.results = results;
+    public void setData(List<JokeEntity> data) {
+        this.data = data;
     }
 }

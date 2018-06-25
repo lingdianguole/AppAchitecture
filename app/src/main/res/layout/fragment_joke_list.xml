@@ -3,15 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="resource"
-            type="yuan.com.androidarchitecture.data.Resource"/>
+            type="yuan.com.androidarchitecture.data.Resource" />
     </data>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:resource="@{resource}"/>
+        app:layoutManager="android.support.v7.widget.GridLayoutManager"
+        app:resource="@{resource}"
+        app:spanCount="2" />
 
 </layout>

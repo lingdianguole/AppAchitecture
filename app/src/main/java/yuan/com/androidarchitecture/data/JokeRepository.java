@@ -33,8 +33,8 @@ public class JokeRepository {
 
             @Override
             protected void saveCallResult(@NonNull JokeResponse item) {
-                if (item != null) {
-                    jokeDao.saveMovies(item.getResults());
+                if (item != null && item.getData() != null) {
+                    jokeDao.saveMovies(item.getData());
                 }
             }
 

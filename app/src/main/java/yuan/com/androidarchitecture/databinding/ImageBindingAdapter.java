@@ -15,7 +15,7 @@ public final class ImageBindingAdapter {
     public static void loadImageUrl(ImageView view, String url) {
         if (url != null && !url.equals(""))
             Picasso.with(view.getContext())
-                    .load(ApiConstants.IMAGE_ENDPOINT_PREFIX + url)
+                    .load(url)
                     .placeholder(R.drawable.placeholder)
                     .into(view);
     }

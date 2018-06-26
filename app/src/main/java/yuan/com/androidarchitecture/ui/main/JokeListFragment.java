@@ -53,7 +53,7 @@ public class JokeListFragment extends BaseFragment<JokeListViewModel, FragmentJo
         //用liveData观察数据，改变UI
         viewModel.loadJokes(type);
         viewModel.jokeLiveData
-                .observe(this, listResource -> dataBinding.setResource(listResource));
+                .observe(this, listResource ->  dataBinding.setResource(listResource));
     }
 
     @Override

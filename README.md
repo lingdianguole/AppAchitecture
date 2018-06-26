@@ -236,7 +236,10 @@ viewModel.getPopularMovies().observe
 ```
 #### 3.4、效果
 
-<img src="https://github.com/lingdianguole/AppAchitecture/blob/master/help/Screenrecord.mp4"/>
+<video controls="controls">
+      <source id="mp4" src="https://github.com/lingdianguole/AppAchitecture/blob/master/help/Screenrecord.mp4" type="video/mp4">
+      </source>
+</video>
 
 # **4、总结:**
 以上就是关键代码，重点是要明白每一个组件的用法，然后把它们连在一起，理解项目结构图。以上是根据官方文档和自己的理解写出来的，如果有什么问题欢迎指正，我的邮箱lingdianguole@l63.com

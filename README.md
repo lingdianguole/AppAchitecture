@@ -1,4 +1,4 @@
-# **1、前言：**
+# **1、前言：** 
 现在市面上APP的框架有mvc、mvp、mvvm等，每一种框架都有利弊，Google推荐的框架是Mvvm+LiveData+Room，这样好像能解决很多问题，我用了之后的感觉还不错，所以打算写个文档，大家共同学习。
 
 ## **1.1、该框架能解决的问题**
@@ -17,7 +17,7 @@ LiveData是一个可以被观察的数据持有类，它可以感知并遵循Act
 public class NameViewModel extends ViewModel {
 
     private MutableLiveData<String> mCurrentName;
-
+    
     public MutableLiveData<String> getCurrentName() {
         if (mCurrentName == null) {
             mCurrentName = new MutableLiveData<String>();
@@ -34,7 +34,7 @@ public class NameViewModel extends ViewModel {
 public class NameActivity extends AppCompatActivity {
 
     private NameViewModel mModel;
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +53,7 @@ public class NameActivity extends AppCompatActivity {
 
         //在activity里观察LiveData的改变
         mModel.getCurrentName().observe(this, nameObserver);
-
+        
         //为了更直观，直接在这里发送数据，一般发送数据是在网络请求完成火车数据库查询完成后更新UI
         mButton.setOnClickListener(new OnClickListener() {
               @Override
@@ -70,21 +70,21 @@ public class NameActivity extends AppCompatActivity {
     LiveData<User> userLiveData = ...;
     LiveData<String> userName = Transformations.map(userLiveData, user -> {
     user.name + " " + user.sex  });
-
+    
     //将String变为User
     private LiveData<User> getUser(String id) {
-     ...;
+     ...;  
     }
     LiveData<String> userId = ...;
     LiveData<User> user = Transformations.switchMap(userId, id -> getUser(id) );
-
+    
 ```
-**2.3、扩展MediatorLiveData**
+**2.3、扩展MediatorLiveData**   
 
 LiveData的子类，它可以合并多个LiveData,当任意一个LiveData被触发，它监听的对象就会改变，例如：
 
 如果我们需要一个LiveData同时监听网络和数据库的变化，达到更新UI的目的，我们就可以用MediatorLiveData。一个LiveData与数据库关联，一个LiveData与网络请求关联。
-
+ 
 # **3、项目架构图:**
 
 <img src="https://github.com/lingdianguole/AppAchitecture/blob/master/help/final-architecture.png"/>
@@ -94,7 +94,7 @@ LiveData的子类，它可以合并多个LiveData,当任意一个LiveData被触�
 - **Room持久化数据组件**
 - **Retrofit网络请求框架**
 
-### 3.1、关键类**NetworkBoundResource.java**解析
+### 3.1、关键类**NetworkBoundResource.java**解析   
 它是个抽象类，同时也是一个公共类，对于每一次获取数据，针对请求对象ResultType和返回对象RequestType，用MediatorLiveData查询本地数据库和请求网络数据。
 ```
 public abstract class NetworkBoundResource<ResultType, RequestType> {
@@ -209,7 +209,7 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
         }.getAsLiveData();
     }
 ```
-#### 3.2、ViewModel调用仓库层
+#### 3.2、ViewModel调用仓库层  
 ```
 public class JokeListViewModel extends ViewModel {
     private JokeRepository jokeRepository;
@@ -229,19 +229,21 @@ public class JokeListViewModel extends ViewModel {
 
 ```
 #### 3.3、Activity观察数据变化
-//得到数据listReource，更新UI
+//得到数据listReource，更新UI  
 ```
 viewModel.getPopularMovies().observe
 (this, listResource -> dataBinding.setResource(listResource));
-```
+```          
 #### 3.4、效果
 
-
-
+<img src="https://github.com/lingdianguole/AppAchitecture/blob/master/help/screen.gif" width="320px"/>
+                 
 # **4、总结:**
-以上就是关键代码，重点是要明白每一个组件的用法，然后把它们连在一起，理解项目结构图。有任何意见，欢迎指正，我的邮箱lingdianguole@l63.com
+以上就是关键代码，重点是要明白每一个组件的用法，然后把它们连在一起，理解项目结构图。以上是根据官方文档和自己的理解写出来的，如果有什么问题欢迎指正，我的邮箱lingdianguole@l63.com  
 ## [项目地址](https://github.com/lingdianguole/AppAchitecture)
 
-参考文档：
+参考文档：    
+
+https://developer.android.com/topic/libraries/architecture/livedata
 https://developer.android.com/topic/libraries/architecture/guide.html#recommendedapparchitecture
 https://github.com/googlesamples/android-architecture-components

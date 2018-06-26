@@ -58,7 +58,7 @@ public class JokeListAdapter extends BaseAdapter<JokeListAdapter.JokeViewHolder,
             super(binding.getRoot());
             this.binding = binding;
             binding.getRoot().setOnClickListener(v ->
-                    callback.onJokeClicked(binding.getJoke(), binding.imageViewCover));
+                    callback.onJokeClicked(binding.getJoke()));
         }
 
         public void onBind(JokeEntity jokeEntity) {

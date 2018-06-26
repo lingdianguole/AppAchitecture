@@ -14,12 +14,30 @@ public class JokeEntity {
     @PrimaryKey
     @SerializedName("user_id")
     private String user_id;
-
+    @SerializedName("data_type")
+    private String data_type;  //数据类型
     @SerializedName("name")
     private String name;
-
     @SerializedName("profile_image")
     private String profile_image;
+    @SerializedName("text")
+    private String text;
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getData_type() {
+        return data_type;
+    }
+
+    public void setData_type(String data_type) {
+        this.data_type = data_type;
+    }
 
     public String getUser_id() {
         return user_id;

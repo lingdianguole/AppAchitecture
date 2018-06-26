@@ -1,5 +1,6 @@
 package yuan.com.androidarchitecture.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -13,6 +14,7 @@ import yuan.com.androidarchitecture.data.local.entity.JokeEntity;
 import yuan.com.androidarchitecture.databinding.FragmentJokeListBinding;
 import yuan.com.androidarchitecture.ui.BaseFragment;
 import yuan.com.androidarchitecture.ui.detail.JokeDetailActivity;
+import yuan.com.androidarchitecture.widget.OffsetDecoration;
 
 public class JokeListFragment extends BaseFragment<JokeListViewModel, FragmentJokeListBinding> implements JokeListCallback {
     private static final String INTENT_TYPE = "intent_type";
@@ -39,8 +41,8 @@ public class JokeListFragment extends BaseFragment<JokeListViewModel, FragmentJo
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        dataBinding.recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         dataBinding.recyclerView.setAdapter(new JokeListAdapter(this));
+        dataBinding.recyclerView.addItemDecoration(new OffsetDecoration(10));
         return dataBinding.getRoot();
     }
 
@@ -49,14 +51,15 @@ public class JokeListFragment extends BaseFragment<JokeListViewModel, FragmentJo
         super.onActivityCreated(savedInstanceState);
         String type = getArguments().getString(INTENT_TYPE);
         //用liveData观察数据，改变UI
-        viewModel.getPopularMovies(type)
+        viewModel.loadJokes(type);
+        viewModel.jokeLiveData
                 .observe(this, listResource -> dataBinding.setResource(listResource));
     }
 
     @Override
-    public void onJokeClicked(JokeEntity jokeEntity, View sharedView) {
-        ActivityOptionsCompat options = ActivityOptionsCompat.
-                makeSceneTransitionAnimation(getActivity(), sharedView, getString(R.string.shared_image));
-        startActivity(JokeDetailActivity.newIntent(getActivity(), jokeEntity.getUser_id()), options.toBundle());
+    public void onJokeClicked(JokeEntity jokeEntity) {
+        Intent intent = new Intent(getContext(), JokeDetailActivity.class);
+        intent.putExtra(JokeDetailActivity.KEY_JOKE_ID, jokeEntity.getUser_id());
+        startActivity(intent);
     }
 }

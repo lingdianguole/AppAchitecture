@@ -13,8 +13,7 @@
     <ScrollView
         android:id="@+id/scrollViewDetail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorMainDark">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,18 +30,18 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:background="@color/colorMainDark"
+                    android:background="#fff"
                     app:expandedTitleTextAppearance="@android:color/transparent"
                     app:layout_collapseMode="pin"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+                    app:theme="@style/ThemeOverlay.AppCompat.Light">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
                         android:singleLine="true"
                         android:text="@{joke.name}"
-                        android:layout_marginRight="16dp"
                         android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/textSizeExtraLarge"
                         android:textStyle="bold" />
@@ -52,93 +51,20 @@
             </android.support.design.widget.AppBarLayout>
 
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/imageViewCover"
-                    android:layout_width="150dp"
-                    android:layout_height="200dp"
-                    android:layout_margin="16dp"
-                    android:transitionName="@string/shared_image"
-                    app:url="@{joke.profile_image}" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:layout_toRightOf="@+id/imageViewCover"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_language_green_24dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="8dp"
-                            android:singleLine="true"
-                            android:text="@{joke.name}"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/textSizeLarge" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_stars_green_24dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="8dp"
-                            android:singleLine="true"
-                            android:text="@{String.valueOf(joke.name)}"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="@dimen/textSizeLarge" />
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-
-            </RelativeLayout>
+            <ImageView
+                android:id="@+id/imageViewCover"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:layout_margin="16dp"
+                app:url="@{joke.profile_image}" />
 
             <TextView
+                android:id="@+id/tv_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:text="INFO"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/textSizeExtraLarge" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:text="@{joke.name}"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/textSizeLarge" />
-
-
+                android:text="content"
+                android:textColor="#000" />
         </LinearLayout>
     </ScrollView>
 

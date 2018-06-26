@@ -6,5 +6,5 @@ import yuan.com.androidarchitecture.data.local.entity.JokeEntity;
 
 
 public interface JokeListCallback {
-    void onJokeClicked(JokeEntity jokeEntity, View sharedView);
+    void onJokeClicked(JokeEntity jokeEntity);
 }

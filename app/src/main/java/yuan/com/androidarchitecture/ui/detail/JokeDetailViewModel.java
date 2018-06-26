@@ -20,7 +20,7 @@ public class JokeDetailViewModel extends ViewModel{
         this.jokeRepository = jokeRepository;
     }
 
-    public LiveData<JokeEntity> getMovie(int id){
-        return jokeRepository.getMovie(id);
+    public LiveData<JokeEntity> getJoke(String user_id){
+        return jokeRepository.getJoke(user_id);
     }
 }

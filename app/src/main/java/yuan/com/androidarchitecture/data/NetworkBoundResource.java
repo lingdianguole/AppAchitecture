@@ -1,8 +1,3 @@
-/*
- * setvalue一次代表通知观察者一次，会收到提示
- *
- *
- */
 package yuan.com.androidarchitecture.data;
 
 import android.arch.lifecycle.LiveData;
@@ -29,7 +24,7 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
             if (shouldFetch(data)) {         //判断是否请求网络，如果是则发起网络请求，否则把本地数据给观察者，提示加载成功
                 fetchFromNetwork(dbSource);
             } else {
-                result.addSource(dbSource, newData -> result.setValue(Resource.success(newData)));
+                result.addSource(dbSource, newData -> result.setValue(Resource.success(newData)));  //setvalue一次代表通知观察者一次，会收到提示
             }
         });
     }
@@ -69,22 +64,27 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
         }.execute();
     }
 
+    //存储网络访问结果到数据库
     @WorkerThread
     protected abstract void saveCallResult(@NonNull RequestType item);
 
+    //是否请求网络
     @MainThread
     protected boolean shouldFetch(@Nullable ResultType data) {
         return true;
     }
 
+    //从数据库取数据
     @NonNull
     @MainThread
     protected abstract LiveData<ResultType> loadFromDb();
 
+    //发起网络请求
     @NonNull
     @MainThread
     protected abstract Call<RequestType> createCall();
 
+    //网络请求失败
     @MainThread
     protected void onFetchFailed() {
     }

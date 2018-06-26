@@ -31,7 +31,7 @@ public class JokeRepository {
         this.jokeDBService = jokeDBService;
     }
 
-    public LiveData<Resource<List<JokeEntity>>> loadPopularMovies(String type, String page) {
+    public LiveData<Resource<List<JokeEntity>>> loadPopularJokes(String type, String page) {
         return new NetworkBoundResource<List<JokeEntity>, JokeResponse>() {
 
             @Override
@@ -40,7 +40,7 @@ public class JokeRepository {
                     for (JokeEntity jokeEntity : item.getData()) {  //由于返回的type和请求的type不一样，所以自定义类型
                         jokeEntity.setData_type(type);
                     }
-                    if (page.equals("1")) {   //第一页的时候清空数据
+                    if (page.equals("1")) {   //第一页的时候清空数据,防止一直加载的缓存数据
                         jokeDao.deleteJokes(type);
                     }
                     jokeDao.saveJokes(item.getData());

@@ -13,15 +13,11 @@ import yuan.com.androidarchitecture.data.JokeRepository;
 import yuan.com.androidarchitecture.data.Resource;
 import yuan.com.androidarchitecture.data.local.entity.JokeEntity;
 
-/**
- * Created by mertsimsek on 19/05/2017.
- */
-
 public class JokeListViewModel extends ViewModel {
     private JokeRepository jokeRepository;
     private MutableLiveData<String> pageLiveData = new MutableLiveData<>();
     public final LiveData<Resource<List<JokeEntity>>> jokeLiveData =
-            Transformations.switchMap(pageLiveData, type -> jokeRepository.loadPopularMovies(type, "1"));
+            Transformations.switchMap(pageLiveData, type -> jokeRepository.loadPopularJokes(type, "1"));
 
     @Inject
     public JokeListViewModel(JokeRepository jokeRepository) {
@@ -29,6 +25,6 @@ public class JokeListViewModel extends ViewModel {
     }
 
     public void loadJokes(String type) {
-        pageLiveData.setValue(type);
+        pageLiveData.setValue(type);   //将type传递给jokeLiveData
     }
 }

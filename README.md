@@ -87,7 +87,7 @@ LiveData的子类，它可以合并多个LiveData,当任意一个LiveData被触�
 
 # **3、项目架构图:**
 
-![image](https://github.com/iammert/AndroidArchitecture/blob/master/art/art.png)
+<img src="https://github.com/lingdianguole/AppAchitecture/blob/master/help/final-architecture.png"/>
 
 - **仓库层Repository连接ViewModel和数据（本地数据、网络数据）**
 - **LiveData在ViewModel里定义，Activity/Fragment里观察，网络请求和数据库查询的结果都是LiveData,目的是为了当数据变化时传递数据，自动更新UI**

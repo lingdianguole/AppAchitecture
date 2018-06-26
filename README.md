@@ -185,7 +185,7 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
 <img src="https://github.com/lingdianguole/AppAchitecture/blob/master/help/network-bound-resource.png"/>
 
 
-#### 3.1、仓库层调用
+#### 3.2、仓库层调用
   ```
    public LiveData<Resource<List<JokeEntity>>> loadPopularJokes(String type, String page) {
         return new NetworkBoundResource<List<JokeEntity>, JokeResponse>() {
@@ -210,7 +210,7 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
         }.getAsLiveData();
     }
 ```
-#### 3.2、ViewModel调用仓库层  
+#### 3.3、ViewModel调用仓库层  
 ```
 public class JokeListViewModel extends ViewModel {
     private JokeRepository jokeRepository;
@@ -229,13 +229,13 @@ public class JokeListViewModel extends ViewModel {
 }
 
 ```
-#### 3.3、Activity观察数据变化
+#### 3.4、Activity观察数据变化
 //得到数据listReource，更新UI  
 ```
 viewModel.getPopularMovies().observe
 (this, listResource -> dataBinding.setResource(listResource));
 ```          
-#### 3.4、效果
+#### 3.5、效果
 
 <img src="https://github.com/lingdianguole/AppAchitecture/blob/master/help/screen.gif" width="320px"/>
                  

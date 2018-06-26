@@ -237,8 +237,8 @@ viewModel.getPopularMovies().observe
 #### 3.4、效果
 
 <iframe
-    width="800"
-    height="450"
+    width="1080"
+    height="1920"
     src="https://github.com/lingdianguole/AppAchitecture/blob/master/help/Screenrecord.mp4"
     frameborder="0"
     allowfullscreen>

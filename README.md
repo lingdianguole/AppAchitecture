@@ -1,5 +1,5 @@
 # **1、前言：** 
-现在市面上APP的框架有mvc、mvp、mvvm等，每一种框架都有利弊，Google推荐的框架是Mvvm+LiveData+Room，这样好像能解决很多问题，我用了之后的感觉还不错，所以打算写个文档，大家共同学习。
+现在市面上APP的框架有mvc、mvp、mvvm等，每一种框架都有利弊，Google推荐的框架是Mvvm+LiveData+Room，这样好像能解决很多问题，自己研究了下，分享给大家。
 
 ## **1.1、该框架能解决的问题**
 - 数据缓存，在无网环境下本地缓存有数据就加载本地数据
@@ -54,7 +54,7 @@ public class NameActivity extends AppCompatActivity {
         //在activity里观察LiveData的改变
         mModel.getCurrentName().observe(this, nameObserver);
         
-        //为了更直观，直接在这里发送数据，一般发送数据是在网络请求完成火车数据库查询完成后更新UI
+        //为了更直观，直接在这里发送数据，一般发送数据是在网络请求完成或者数据库查询完成后更新UI
         mButton.setOnClickListener(new OnClickListener() {
               @Override
              public void onClick(View v) {
@@ -81,16 +81,17 @@ public class NameActivity extends AppCompatActivity {
 ```
 **2.3、扩展MediatorLiveData**   
 
-LiveData的子类，它可以合并多个LiveData,当任意一个LiveData被触发，它监听的对象就会改变，例如：
+LiveData的子类，它可以合并多个LiveData，当任意一个LiveData被触发，它监听的对象就会改变，例如：
 
-如果我们需要一个LiveData同时监听网络和数据库的变化，达到更新UI的目的，我们就可以用MediatorLiveData。一个LiveData与数据库关联，一个LiveData与网络请求关联。
+如果我们需要一个LiveData同时监听网络和数据库的变化，达到更新UI的目的，就可以用MediatorLiveData。  
+一个LiveData与数据库关联，一个LiveData与网络请求关联。
  
 # **3、项目架构图:**
 
 <img src="https://github.com/lingdianguole/AppAchitecture/blob/master/help/final-architecture.png"/>
 
 - **仓库层Repository连接ViewModel和数据（本地数据、网络数据）**
-- **LiveData在ViewModel里定义，Activity/Fragment里观察，网络请求和数据库查询的结果都是LiveData,目的是为了当数据变化时传递数据，自动更新UI**
+- **LiveData在ViewModel里定义，Activity/Fragment里观察，网络请求和数据库查询的结果都是LiveData,目的是为了当数据变化时通知观察者，然后更新UI**
 - **Room持久化数据组件**
 - **Retrofit网络请求框架**
 
@@ -109,7 +110,7 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
             if (shouldFetch(data)) {         //判断是否请求网络，如果是则发起网络请求，否则把本地数据给观察者，提示加载成功
                 fetchFromNetwork(dbSource);
             } else {
-                result.addSource(dbSource, newData -> result.setValue(Resource.success(newData)));  //setvalue一次代表通知观察者一次，会收到提示
+                result.addSource(dbSource, newData -> result.setValue(Resource.success(newData)));  //setvalue一次代表通知观察者一次
             }
         });
     }
